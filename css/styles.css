@@ -1,0 +1,299 @@
+/* variables css, pseudo clases */
+:root{
+    --primary-color: hsl(214, 84%, 56%);
+    --text-color: hsl(0 ,0%, 31%);
+    --bg-color: hsl(0, 0%, 90%);
+    /* variable que controlara el border-radius de todas las tarjetas y asi podre que todos los bordes redondeados sean del mismo tamaño y poderlos controlar*/
+    --border-radius:  0.4em;
+    /*  esta variable sera para las tarjetas de nuestros porfolio */
+    --bg-card-color: hsl(0, 0%, 98%);
+    /* cambio de color y el color de fondo y los valores para que uno cambie mas rapido qu el background color */
+    --transition: color 0.1s, background-color 0.2s ease-in-out;
+    /* varaible para controlar el tamaño de la barra */
+    --skill-bar-length: 0%;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+a{
+    color: var(--primary-color);
+    text-decoration: none;
+}
+/* con esto se ara que ninguna imagen desborde de su contenedor */
+img{
+  max-width: 100%;
+  display: block;
+}
+
+body{
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: var(--transition);
+    font-family: sans-serif;
+}
+
+/* cuando el body tenga dark mode lo se hace es sustituir los valores de las variables*/
+
+body.dark{
+    --text-color: hsl(0, 0%, 83%);
+    --bg-color: hsl(0, 0%, 15%);
+    --bg-card-color: hsl(0, 0%, 20%);
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 75px;
+    padding: 0 1.5em;
+    /* sera blanco pero cuando lo establesca en body.dark cambiara */
+    background-color: var(--bg-card-color);
+    transition: var(--transition);
+
+}
+
+.switches{
+    display: flex;
+    /* align-items para que este centrado vertical mente */
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toggle-theme{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* asi aprecera una imagen por encima cuando nos coloquemos */
+    cursor: pointer;
+}
+
+.toggle-theme_icon{
+    /* para separar el texto un poco del icono */
+  margin-right: 0.5em ;
+ width: 20px;
+} 
+
+.toggle-theme_text{
+    font-size: 0.8rem;
+}
+
+.colors{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 20px;
+    width: 100px;
+}
+
+.colors_item{
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--text-color);
+    background-color: var(--primary-color);
+    cursor: pointer;
+}
+
+.colors_item--blue{
+    --primary-color: hsl(214, 84%, 56%);
+}
+
+.colors_item--green{
+    --primary-color: hsl(150, 84%, 56%);
+}
+
+.colors_item--purple{
+    --primary-color: hsl(276, 84%, 56%);
+}
+
+.colors_item--orange{
+    --primary-color: hsl(46, 84%, 56%);
+}
+  
+.title{
+    text-align: center;
+    color: var(--primary-color);
+    transition: var(--transition);
+
+}
+
+/* el porfolio sera en 2 columnas*/
+
+.main{
+    /* este seria para movil con una columna basta*/
+    display: grid;
+    /* para separar un poco del header y de la izquierda*/
+    padding: 2em;
+}
+
+@media screen and (min-width:720px){
+    .main{
+         /* primera columna el minio del tamaño para que el contenido dentre y  se vizualice la segunda columna un 1fr el espacio que 
+        tenga disponible*/ 
+         grid-template-columns: min-content 1fr;
+     }
+    }
+
+/* aqui iria los estil;os comunes de la columna izquierda y derecha */
+.column{
+    /* grip hace que los elementos ocupen todo lo que puedan y no me agrada que ocipe la referencia de mi perfil*/
+    display: grid;
+    gap: 0.5em;
+}
+
+@media screen and (min-width:720px){
+    .column{
+         /* primera columna el minio del tamaño para que el contenido dentre y  se vizualice la segunda columna un 1fr el espacio que 
+        tenga disponible*/ 
+         grid-template-columns: repeat(3, 1fr);
+         /* para que manetnga su estado natural y ahora va ocupar lo9 que necesite para almacenar ese contenido a mas contenido mas ocupara  */
+         grid-template-rows: repeat(3, min-content);
+     }
+    }
+
+
+/* contenedor principal*/
+.card{
+   padding: 1em;
+   background-color: var(--bg-card-color);
+   border-radius: var(--border-radius);
+}
+
+.card_image-container{
+    /* aqui seria el movil mas pequeño*/
+    min-width: 320px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+/* las imagen no esta redondeada aunque al contenedor le aya dicho que tenga un border radius y esto sucede por que las esquinas de la imagen siempre van a desvordar al contenedor para solucionarlo se aria con overflow: hidden y esto aria que se redondee por arriba pero aun abajo tiene esquinas y esto se debe a como se comportan las imagenes en el navegador ya que tecnica mente una imagen tiene un display: inline block por defecto por eso siempre apararece un borde fantamas por que me persigue la llorona jajaja que me impiede que se redondee esas esquinas para solucionarlo es ir al img y se le da  un display: block y asi ya tendriamos redondeado por completo la imagen sin que la llorona salga jaja  */
+
+.card_header{
+    /* los h2 tiene un margen por defecto  */
+    padding: 1em 0;
+}
+
+.card_title{
+    /* y para quitarselo es darle un margin 0 al texto no al contenedor */
+    margin: 0;
+    font-size: 1rem;
+}
+
+.card_subtitle{
+    /* y asi no resaltara mas que el titulo */
+    font-size: 0.9rem;
+    opacity:0.8;
+}
+
+.card_link{
+    /* para que no este muy amontonados */
+    margin-bottom: 0.5em;
+}
+
+.card_text{
+    font-size: 0.9rem;
+    /* para que se separen las linias */
+    line-height: 1.5;
+}
+
+/* este sera el bloque donde va manetener el titulo y las barras de progreso*/
+.skills{
+    /* hace que se separe tanto en lo vertical como en lo horizontal*/
+    padding: 1em 0;
+
+}
+/*contiene el nombre como la barra*/
+.skills__item{
+    /* con esto se logra que el titulo y la barra esten aliniados vertical mente y en un punto de la tarjeta que es lo deseo lograr */
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+/* este sera el fondo de la barra  */
+.skills__bar,
+.skills__bar::after{
+    /* aqui  establesco el tamaño de la barra para que comparatan estilos tanto el fondo como la barra*/
+    position: relative;
+    /* se le establece position:relative para que el after se coloques respecto a el es decir a skill__bar */
+ width: 175px;
+ height: 8px;
+ background-color: #888;
+ border-radius: var(--border-radius);
+ /* aqu8i un overflow:hidden para que todo lo que desvorde no se vea*/
+ overflow: hidden;
+}
+
+/* relleno de la barra*/
+.skills__bar::after{
+/* aqui iran los estilos de esa barra*/
+    content: "";
+    /* el content ara que se dibuje */
+    position: absolute;
+    /* seria logico que se extableria dentro de la barra pero se esta colocando respecto al viewport */
+    left: -175px;
+    /* y como se seria adecuado que la barrra aparesca al lado derecho enves que a la izquierda se le da - luego con overflow:hidden ocultare todo lo que se desborde del fondo de la barra*/
+    background-color: var(--primary-color);
+    /* la variable de transition cuando se cambie de color*/
+    transition: var(--transition);
+    /* aun no se muestra por que le dbo dar un tamaño y debe ser el mismo que el fondo de la barra*/
+    animation: skills-bar-fill 2s ease-in-out forwards;
+    /* forwards ara que se quede donde termine la animacion */
+}
+
+.skills__bar--10::after{
+    --skills-bar-length: 10%;
+}
+
+.skills__bar--20::after{
+    --skills-bar-length: 20%;
+}
+
+.skills__bar--30::after{
+    --skills-bar-length: 30%;
+}
+
+.skills__bar--40::after{
+    --skills-bar-length: 40%;
+}
+
+.skills__bar--50::after{
+    --skills-bar-length: 50%;
+}
+
+.skills__bar--60::after{
+    --skills-bar-length: 60%;
+}
+
+.skills__bar--70::after{
+    --skills-bar-length: 70%;
+}
+
+.skills__bar--80::after{
+    --skills-bar-length: 80%;
+}
+
+.skills__bar--90::after{
+    --skills-bar-length: 90%;
+}
+
+
+.skills__bar--70::after{
+    /* enves de usar directa mente este valor translate(70%) usare la variable creada y se queda al 0% es por que tiene el valor inicial mente*/
+    --skills-bar-length: 70%;
+    /* la animacion va cambiar el  transform: translate(x)  */
+
+}
+
+.icon{
+    margin-right: 1em;
+}
+
+@keyframes skills-bar-fill {
+/* lo unicoi que quiero es que cambie ese valor de x */
+   to {
+       /* la animacion se va mover asta lo que valga la varible y blo que se hace es modificar el valor de la variable*/
+       transform: translateX(var(--skills-bar-length));
+   }
+}
